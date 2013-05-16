@@ -1,0 +1,8 @@
+{
+  "name": "mobile-drum-machine",
+  "version": "0.0.1",
+  "dependencies": {
+  	"express": "*",
+    "socket.io": "*"
+  }
+}
