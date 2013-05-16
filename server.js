@@ -6,9 +6,7 @@ server.listen(8443);
 
 // Index
 app.get('/', function (req, res) {
-    // TODO generate better random
-    var room = Math.floor(Math.random()*100000000);
-    res.redirect('/' + room);
+  res.sendfile(__dirname + '/index.html');
 });
 
 // Instruments
@@ -32,7 +30,7 @@ app.get('/hh2.wav', function (req, res) {
 });
 
 app.get('/:room', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+  res.sendfile(__dirname + '/room.html');
 });
 
 // On new connections (from admin or instrument)
