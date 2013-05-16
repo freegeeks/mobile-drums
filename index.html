@@ -6,29 +6,44 @@
     <meta name="description" content="This is a mobile machine drum to play with friends in the same room. Admin can control intruments in the peers mobile devices.">
     <meta name="keywords" content="mobile machine drum, mobile, machine, drum, machine drum, play, friend, friends">
     <meta name="author" content="Free Geeks a.k.a. RRR">
-
 	<title>Mobile Machine Drum</title>
     <style>
     /*
      * Add CSS here
      */
-     .instrument {
-         display: inline-block;
-         float: left:
-         margin: 5px;
-         padding: 10px;
-         border: 1px solid #000;
-         width: 100px;
-         height: 100px;
-         color: #000;
-         font-size: 20pt;
-         font-family: helvetica;
-         vertical-align: middle;
-         text-transform: uppercase;
-         text-align: center;
+     html, body {
+     	width: 100%;
+     	height: 100%;
+     	margin: 0;
      }
+     .instrument {
+         float: left;
+         padding: 50px;
+         border: 1px solid #000;
+         background: #fff;
+         list-style: none;
+         margin-top: 60px;
+     }
+     .instrument:hover {
+     	opacity: .6;
+     	border: 10px solid #333;
+     }
+     
      audio {
          display: none;
+     }
+     h1 {
+     	z-index: 100;
+     }
+     ul { 
+         background: url(img/bg.png) no-repeat center top;
+         height: 3000px;
+         width: 100%;
+         position: absolute;
+         top: 0;
+         left: 0;
+         margin: 0;
+         z-index: -1;
      }
     </style>
 </head>
@@ -39,15 +54,15 @@
 
     <audio src="/coin.wav" controls="controls"></audio> 
 
-    <div id="instruments">
-        <div class="instrument" data-color="red" data-wav="tom"></div>
-        <div class="instrument" data-color="orange" data-wav="sn"></div>
-        <div class="instrument" data-color="yellow" data-wav="hh2"></div>
-        <div class="instrument" data-color="green" data-wav="hh1"></div>
-        <div class="instrument" data-color="blue" data-wav="bd"></div>
-        <div class="instrument" data-color="indigo" data-wav="bd"></div>
-        <div class="instrument" data-color="violet" data-wav="bd"></div>
-    </div>
+    <ul id="instruments">
+        <li class="instrument" data-color="red" data-wav="tom"></li>
+        <li class="instrument" data-color="orange" data-wav="sn"></li>
+        <li class="instrument" data-color="yellow" data-wav="hh2"></li>
+        <li class="instrument" data-color="green" data-wav="hh1"></li>
+        <li class="instrument" data-color="blue" data-wav="bd"></li>
+        <li class="instrument" data-color="indigo" data-wav="bd"></li>
+        <li class="instrument" data-color="violet" data-wav="bd"></li>
+    </ul>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
