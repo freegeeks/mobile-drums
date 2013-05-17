@@ -1,7 +1,7 @@
 - index.html e room.html1
-- no namespace, maybe namespace admin, room is the room name (/path)
+- no namespace, maybe namespace adm, room is the room name (/path)
 - hit go to all clients
-- role adm, client
+- role adm, cli
 - color and audio only to right instrument
 - visual to all in the room
 
@@ -12,7 +12,7 @@ FLOW
 - on submit on index.html form redirect to /room-name
 - /room-name get the location.path and joins the room-name
 - server defines the first to connect as ADMIN (keeps track of it)
-- admin has to share the address with clients (maybe with QR , facebook)
+- MANUAL - admin has to share the address with clients (maybe with QR , facebook)
 - shows the DRUMS on click on instrument, send hit to all clients
 - when admin leaves, the next to join get to be the admin
 

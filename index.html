@@ -207,8 +207,6 @@
         $('body').style.backgroundColor = 'white';
     });
 
-    var socket = io.connect('http://84.33.51.10', 8443);
-
     // Paint the instruments with its own color
     // and adds the text inside it
     $$('.instrument').each(function () {
@@ -216,17 +214,33 @@
         this.innerHTML = this.dataset.wav;
     });
 
+
     // Define room name used for all events
     var room    = location.pathname;
+
+    // connect
+    var socket = io.connect('http://84.33.51.10', 8443);
+
+    // join the room
+    socket.on('connect', function () {
+        socket.emit('join', room);
+    });
+    socket.on('role', function (role) {
+        if (role == 'adm') {
+            admin();
+        }
+        else {
+            instrument();
+        }
+    });
 
     var admin = function () { 
 
         $('h1').innerHTML = 'Mobile Machine Drum - Admin';
 
         // New instrument joins
-        socket.on(room + '-instrument', function (data) {
+        socket.on('instrument', function (data) {
             audio.play();
-            //$('.instrument[data-wav=' + data.wav + ']').appendChild('<span>.</span>');
         });
 
         // Once select the instrument
@@ -242,7 +256,7 @@
         $('h1').innerHTML = 'Mobile Machine Drum - Instrument';
 
         // Clean event instrument joins
-        socket.on(room + '-instrument', function () {});
+        socket.on('instrument', function () {});
 
         // Once select the instrument
         $$('.instrument').on('click', function () {
@@ -262,11 +276,13 @@
             socket.emit('instrument', { room: room, wav: wav });
 
             // Listen to the HIT
-            socket.on(room + '-hit-' + wav , function() {
+            socket.on('hit', function(hit_wav) {
                 
-                // Play audio
-                audio.currentTime = 0;
-                audio.play();
+                // Play audio, but only if selected wav
+                if (hit_wav == wav) {
+                    audio.currentTime = 0;
+                    audio.play();
+                }
 
                 // Change background to HIT color
                 $('body').style.backgroundColor = color;
@@ -275,28 +291,6 @@
         });
 
     }
-
-    // Self discovery
-    var pongs   = 0;
-    var ping    = Math.floor(Math.random()*100000000);
-    socket.on('ping', function (data) {
-        if (data.room != room) {
-            return;
-        }
-        socket.emit('pong', { id: data.id, room: room });
-    });
-    socket.on('pong', function (data) {
-        if (data.id != ping || data.room != room) {
-            return;
-        }
-        if (++pongs == 1) {
-            admin();
-        }
-        else {
-            instrument();
-        }
-    });
-    socket.emit('ping', { id: ping, room: room });
     </script>
 
 </body>
