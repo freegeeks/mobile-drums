@@ -132,49 +132,41 @@
      }
     </style>
 </head>
-
 <body>
 
-    <h1>Mobile Machine Drum</h1>
-	<p>play drums using your friend’s mobiles!</p>
-    <audio src="/coin.wav" controls="controls"></audio> 
-
-    <ul id="instruments">
-        <li class="instrument" data-color="red" data-wav="tom"></li>
-        <li class="instrument" data-color="orange" data-wav="sn"></li>
-        <li class="instrument" data-color="yellow" data-wav="hh2"></li>
-        <li class="instrument" data-color="green" data-wav="hh1"></li>
-        <li class="instrument" data-color="blue" data-wav="bd"></li>
-        <li class="instrument" data-color="indigo" data-wav="bd"></li>
-    </ul>
-    <input type="text" id="room" name="" value="" placeholder="create new room">
-  	<a href="javascript:;" class="play">play!</a>
-	<h2>share</h2>
+<h1>Mobile Machine Drum</h1>
+<p>play drums using your friend’s mobiles!</p>
+    
+<input type="text" id="room" name="" value="" placeholder="create new room">
+<a href="javascript:;" class="play">play!</a>
 	
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-    /*
-     * Add JS here at the bottom of the page
-     * to avoid the whole document.ready since
-     * we are not using jquery
-     */
+<script src="/socket.io/socket.io.js"></script>
+<script>
+/**
+ * Add JS here at the bottom of the page
+ * to avoid the whole document.ready since
+ * we are not using jquery
+ */
 
-    // Single DOM element selection
-    window.$ = function(selector) {
-      return document.querySelector(selector);
-    };
+// Single DOM element selection
+window.$ = function(selector) {
+  return document.querySelector(selector);
+};
 
-    // Bind event using "on"
-    Element.prototype.on = Element.prototype.addEventListener;
+// Bind event using "on"
+Element.prototype.on = Element.prototype.addEventListener;
 
-    // play button
-    $('.play').on('click', function(e) {
-        e.preventDefault();
-        location.href = '/' + $('#room').value;
-    });
+// play button
+$('.play').on('click', function(e) {
+    e.preventDefault();
+    var roomName = escape($('#room').value);
+    if (roomName.length === 0) {
+      roomName = (new Date()).getTime().toString(16).substr(-8);
+    }
+    location.href = '/' + roomName;
+});
 
-    </script>
+</script>
 
 </body>
-
 </html>
