@@ -77,7 +77,8 @@ io.sockets.on('connection', function (socket) {
 
         // Report to admin which one
         // this is sent to all clients
-        io.sockets.in(data.room).emit('instrument', data.wav);
+        io.sockets.sockets[adms[data.room]].emit('instrument', data.wav);
+
 
     });
 
