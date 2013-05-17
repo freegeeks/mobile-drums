@@ -76,9 +76,8 @@ io.sockets.on('connection', function (socket) {
         }
 
         // Report to admin which one
-        // TODO this is breaking, how to send message to one socket having id
-        //io.sockets[adms[data.room]].emit('instrument', data.wav);
-        //io.clients[adms[data.room]].emit('instrument', data.wav);
+        // this is sent to all clients
+        io.sockets.in(data.room).emit('instrument', data.wav);
 
     });
 
