@@ -147,8 +147,8 @@
         <li class="instrument" data-color="blue" data-wav="bd"></li>
         <li class="instrument" data-color="indigo" data-wav="bd"></li>
     </ul>
-    <input type="text" name="" value="" placeholder="create new room">
-  	<a href="#">play!</a>
+    <input type="text" id="room" name="" value="" placeholder="create new room">
+  	<a href="javascript:;" class="play">play!</a>
 	<h2>share</h2>
 	
     <script src="/socket.io/socket.io.js"></script>
@@ -164,133 +164,15 @@
       return document.querySelector(selector);
     };
 
-    // Multiple DOM element selection
-    window.$$ = function(selector) {
-        var items   = {};
-        var results = Array.prototype.slice.call(document.querySelectorAll(selector));
-        var length  = results.length;
-        
-        for (var i = 0 ; i < length; i++) {
-            items[i] = results[i];
-        }
-        
-        items.length = length;
-        items.splice = [].splice();
-        
-        items.each = function(callback) {
-            for (var i = 0 ; i < length; i++) {
-                callback.call(items[i]);
-            }
-        }
-
-        items.on = function (event, fn) {
-            []['forEach'].call(this, function (el) {
-                el.on(event, fn);
-            });
-            return this;
-        };
-
-        return items;
-    };
-
     // Bind event using "on"
     Element.prototype.on = Element.prototype.addEventListener;
 
-    // Start up audio
-    var audio = $('audio');
-    audio.controls = 'controls';
-    audio.load();
-
-    // Once audio finished playing
-    audio.on('ended', function () {
-        // Change background to WHITE 
-        $('body').style.backgroundColor = 'white';
+    // play button
+    $('.play').on('click', function(e) {
+        e.preventDefault();
+        location.href = '/' + $('#room').value;
     });
 
-    // Paint the instruments with its own color
-    // and adds the text inside it
-    $$('.instrument').each(function () {
-        this.style.backgroundColor = this.dataset.color;
-        this.innerHTML = this.dataset.wav;
-    });
-
-
-    // Define room name used for all events
-    var room    = location.pathname;
-
-    // connect
-    var socket = io.connect('http://84.33.51.10', 8443);
-
-    // join the room
-    socket.on('connect', function () {
-        socket.emit('join', room);
-    });
-    socket.on('role', function (role) {
-        if (role == 'adm') {
-            admin();
-        }
-        else {
-            instrument();
-        }
-    });
-
-    var admin = function () { 
-
-        $('h1').innerHTML = 'Mobile Machine Drum - Admin';
-
-        // New instrument joins
-        socket.on('instrument', function (data) {
-            audio.play();
-        });
-
-        // Once select the instrument
-        $$('.instrument').on('click', function () {
-            // Send the hit to server
-            socket.emit('hit', { room: room, wav: this.dataset.wav });
-        });
-
-    };
-
-    var instrument = function () {
-
-        $('h1').innerHTML = 'Mobile Machine Drum - Instrument';
-
-        // Clean event instrument joins
-        socket.on('instrument', function () {});
-
-        // Once select the instrument
-        $$('.instrument').on('click', function () {
-            var color   = this.dataset.color;
-            var wav     = this.dataset.wav;
-
-            // Remove instrument selection
-            $('#instruments').parentNode.removeChild($('#instruments'));
-
-            // Load selected audio
-            audio.src = 'http://84.33.51.10:8443/' + wav + '.wav';
-            audio.load();
-            audio.play();
-            audio.pause();
-
-            // Inform the server the instrument
-            socket.emit('instrument', { room: room, wav: wav });
-
-            // Listen to the HIT
-            socket.on('hit', function(hit_wav) {
-                
-                // Play audio, but only if selected wav
-                if (hit_wav == wav) {
-                    audio.currentTime = 0;
-                    audio.play();
-                }
-
-                // Change background to HIT color
-                $('body').style.backgroundColor = color;
-            });
-            
-        });
-
-    }
     </script>
 
 </body>

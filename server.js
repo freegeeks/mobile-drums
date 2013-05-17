@@ -46,6 +46,10 @@ io.sockets.on('connection', function (socket) {
 
         // define role
         var role = adms[room] ? 'cli' : 'adm';
+
+        if (role == 'adm') {
+            adms[room] = socket.id;
+        }
         
         // join room
         socket.join(room);
@@ -65,7 +69,10 @@ io.sockets.on('connection', function (socket) {
         }
 
         // Report to admin which one
-        io.sockets[adms[data.room]].emit('instrument', data.wav);
+        // TODO this is breaking, how to send message to one socket having id
+        //io.sockets[adms[data.room]].emit('instrument', data.wav);
+        //io.clients[adms[data.room]].emit('instrument', data.wav);
+
     });
 
 
