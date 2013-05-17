@@ -47,8 +47,15 @@ io.sockets.on('connection', function (socket) {
         // define role
         var role = adms[room] ? 'cli' : 'adm';
 
+        // if admin add to list
         if (role == 'adm') {
             adms[room] = socket.id;
+
+            // clean adm list on disconnect
+            // so next client will get to be the admin
+            socket.on('disconnect', function () {
+                adms[room] = null;
+            });
         }
         
         // join room
@@ -81,14 +88,4 @@ io.sockets.on('connection', function (socket) {
         // Hit the instrument!
 		io.sockets.in(data.room).emit('hit', data.wav);
 	});
-});
-
-// clean adm list on disconnect
-// so next client will get to be the admin
-io.sockets.on('disconnect', function (socket) {
-    for (var room in io.sockets.manager.roomClients[socket.id]) {
-        if (adms[room.substring(1)] == socket.id) {
-            adms[room.substring(1)] == null;
-        }
-    }
 });

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a mobile machine drum to play with friends in the same room. Admin can control intruments in the peers mobile devices.">
+    <meta name="keywords" content="mobile machine drum, mobile, machine, drum, machine drum, play, friend, friends">
+    <meta name="author" content="Free Geeks a.k.a. RRR">
+	<title>Mobile Machine Drum</title>
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+    <style>
+    /*
+     * Add CSS here
+     */
+     html {
+     	width: 100%;
+     }
+     body{
+		background: #062d47; /* Old browsers */
+		background: -moz-linear-gradient(top,  #062d47 0%, #323333 99%, #323333 99%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#062d47), color-stop(99%,#323333), color-stop(99%,#323333)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top,  #062d47 0%,#323333 99%,#323333 99%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top,  #062d47 0%,#323333 99%,#323333 99%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top,  #062d47 0%,#323333 99%,#323333 99%); /* IE10+ */
+		background: linear-gradient(to bottom,  #062d47 0%,#323333 99%,#323333 99%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#062d47', endColorstr='#323333',GradientType=0 ); /* IE6-9 */
+		}
+		body * {
+			font-family: 'Dosis', sans-serif;
+			text-shadow: 2px 2px #000;
+			
+		}
+     .instrument {
+       float: left;
+       padding: 150px;
+       height: 150px;
+       border: 1px solid #000;
+       background: #fff;
+       list-style: none;
+       border-radius: 30px;
+       margin: 15px;
+       display: block;
+       background: #4162a8;
+       border-top: 1px solid #38538c;
+       border-right: 1px solid #1f2d4d;
+       border-bottom: 1px solid #151e33;
+       border-left: 1px solid #1f2d4d;
+       -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
+       box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
+       color: #fff;
+       font: bold 20px/1 "helvetica neue", helvetica, arial, sans-serif;
+       margin-bottom: 10px;
+       padding: 10px 0 12px 0;
+       text-align: center;
+       text-shadow: 0px -1px 1px #1e2d4d;
+       width: 150px;
+       -webkit-background-clip: padding-box;
+    }
+    
+    h1{
+    	width: 100%;
+    	height: 260px;
+    	display: block;
+    	text-indent: -9999px;
+    	margin: auto;
+    	background: url('img/logo.png') no-repeat center top;
+    	height: 420px;
+    }
+       .instrument:hover {
+         -webkit-box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
+         box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
+         cursor: pointer; }
+       .instrument:active {
+         -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
+         box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
+         margin-top: 20px;}
+     
+     audio {
+         display: none;
+     }
+     h1 {
+     	z-index: 100;
+     }
+     ul { 
+         width: 100%;
+         float: left;
+         display: block;
+     }
+     p{
+     	color: #fff;
+     	font-size: 2em;
+     	text-align: center;
+     	padding: 20px;
+     }
+     input {
+     	background: #0080ab;
+     	border-radius: 15px;
+     	padding: 15px;
+     	color: #fff;
+     	font-size: 2em;
+     	width: 80%;
+     	margin: auto;
+     	display: block;
+     	border: 1px solid #333;
+     }
+     a{
+     	font-size: 7em;
+     	color: #fff;
+     	text-decoration: none;
+     	text-align: center;
+     	width: 100%;
+     	float: left;
+     	font-weight: bold;
+     	margin-bottom: 20px;
+     	
+     }
+     h2 {
+     	display: none;
+     }
+     
+     @media (max-width: 500px) {
+     
+     h1 {
+     	background-size: 100%;
+     	height: 270px;
+     	padding-bottom: 11%;
+     }
+     
+     }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mobile Machine Drum</h1>
+	<p>play drums using your friend's mobiles!</p>
+    <audio src="/coin.wav" controls="controls"></audio> 
+
+    <ul id="instruments">
+        <li class="instrument" data-color="red" data-wav="tom"></li>
+        <li class="instrument" data-color="orange" data-wav="sn"></li>
+        <li class="instrument" data-color="yellow" data-wav="hh2"></li>
+        <li class="instrument" data-color="green" data-wav="hh1"></li>
+        <li class="instrument" data-color="blue" data-wav="bd"></li>
+        <li class="instrument" data-color="indigo" data-wav="bd"></li>
+    </ul>
+	<h2>share</h2>
+	
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    /*
+     * Add JS here at the bottom of the page
+     * to avoid the whole document.ready since
+     * we are not using jquery
+     */
+
+    // Single DOM element selection
+    window.$ = function(selector) {
+      return document.querySelector(selector);
+    };
+
+    // Multiple DOM element selection
+    window.$$ = function(selector) {
+        var items   = {};
+        var results = Array.prototype.slice.call(document.querySelectorAll(selector));
+        var length  = results.length;
+        
+        for (var i = 0 ; i < length; i++) {
+            items[i] = results[i];
+        }
+        
+        items.length = length;
+        items.splice = [].splice();
+        
+        items.each = function(callback) {
+            for (var i = 0 ; i < length; i++) {
+                callback.call(items[i]);
+            }
+        }
+
+        items.on = function (event, fn) {
+            []['forEach'].call(this, function (el) {
+                el.on(event, fn);
+            });
+            return this;
+        };
+
+        return items;
+    };
+
+    // Bind event using "on"
+    Element.prototype.on = Element.prototype.addEventListener;
+
+    // Start up audio
+    var audio = $('audio');
+    audio.controls = 'controls';
+    audio.load();
+
+    // Once audio finished playing
+    audio.on('ended', function () {
+        // Change background to WHITE 
+        $('body').style.backgroundColor = 'white';
+    });
+
+    // Paint the instruments with its own color
+    // and adds the text inside it
+    $$('.instrument').each(function () {
+        this.style.backgroundColor = this.dataset.color;
+        this.innerHTML = this.dataset.wav;
+    });
+
+
+    // Define room name used for all events
+    var room    = location.pathname;
+
+    // connect
+    var socket = io.connect('http://84.33.51.10', 8443);
+
+    // join the room
+    socket.on('connect', function () {
+        socket.emit('join', room);
+    });
+    socket.on('role', function (role) {
+        if (role == 'adm') {
+            admin();
+        }
+        else {
+            instrument();
+        }
+    });
+
+    var admin = function () { 
+
+        $('h1').innerHTML = 'Mobile Machine Drum - Admin';
+
+        // New instrument joins
+        socket.on('instrument', function (data) {
+            audio.play();
+        });
+
+        // Once select the instrument
+        $$('.instrument').on('click', function () {
+            // Send the hit to server
+            socket.emit('hit', { room: room, wav: this.dataset.wav });
+        });
+
+    };
+
+    var instrument = function () {
+
+        $('h1').innerHTML = 'Mobile Machine Drum - Instrument';
+
+        // Clean event instrument joins
+        socket.on('instrument', function () {});
+
+        // Once select the instrument
+        $$('.instrument').on('click', function () {
+            var color   = this.dataset.color;
+            var wav     = this.dataset.wav;
+
+            // Remove instrument selection
+            $('#instruments').parentNode.removeChild($('#instruments'));
+
+            // Load selected audio
+            audio.src = 'http://84.33.51.10:8443/' + wav + '.wav';
+            audio.load();
+            audio.play();
+            audio.pause();
+
+            // Inform the server the instrument
+            socket.emit('instrument', { room: room, wav: wav });
+
+            // Listen to the HIT
+            socket.on('hit', function(hit_wav) {
+                
+                // Play audio, but only if selected wav
+                if (hit_wav == wav) {
+                    audio.currentTime = 0;
+                    audio.play();
+                }
+
+                // Change background to HIT color
+                $('body').style.backgroundColor = color;
+            });
+            
+        });
+
+    }
+    </script>
+
+</body>
+
+</html>
