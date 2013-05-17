@@ -39,7 +39,7 @@ io.sockets.on('connection', function (socket) {
             // clean adm list on disconnect
             // so next client will get to be the admin
             socket.on('disconnect', function () {
-                adms[room] = null;
+                delete adms[room];
             });
         }
         
