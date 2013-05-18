@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,6 +67,7 @@
     	background: url('img/logo.png') no-repeat center top;
     	height: 420px;
     }
+       .instrument.hit,
        .instrument:hover {
          -webkit-box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
          box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
@@ -131,165 +131,190 @@
      }
     </style>
 </head>
-
 <body>
 
-    <h1>Mobile Machine Drum</h1>
-	<p>play drums using your friend's mobiles!</p>
-    <audio src="/coin.wav" controls="controls"></audio> 
+<h1>Mobile Machine Drum</h1>
+<p>play drums using your friend's mobiles!</p>
+<audio src="/coin.wav" controls="controls"></audio> 
 
-    <ul id="instruments">
-        <li class="instrument" data-color="red" data-wav="tom"></li>
-        <li class="instrument" data-color="orange" data-wav="sn"></li>
-        <li class="instrument" data-color="yellow" data-wav="hh2"></li>
-        <li class="instrument" data-color="green" data-wav="hh1"></li>
-        <li class="instrument" data-color="blue" data-wav="bd"></li>
-        <li class="instrument" data-color="indigo" data-wav="bd"></li>
-    </ul>
-	<h2>share</h2>
+<ul id="instruments">
+    <li class="instrument" data-color="red" data-wav="tom"></li>
+    <li class="instrument" data-color="orange" data-wav="sn"></li>
+    <li class="instrument" data-color="yellow" data-wav="hh2"></li>
+    <li class="instrument" data-color="green" data-wav="hh1"></li>
+    <li class="instrument" data-color="blue" data-wav="bd"></li>
+    <li class="instrument" data-color="indigo" data-wav="bd"></li>
+</ul>
+
+<h2>share</h2>
 	
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-    /*
-     * Add JS here at the bottom of the page
-     * to avoid the whole document.ready since
-     * we are not using jquery
-     */
+<script src="/socket.io/socket.io.js"></script>
+<script>
+/*
+ * Add JS here at the bottom of the page
+ * to avoid the whole document.ready since
+ * we are not using jquery
+ */
 
-    // Single DOM element selection
-    window.$ = function(selector) {
-      return document.querySelector(selector);
-    };
+// Single DOM element selection
+window.$ = function(selector) {
+  return document.querySelector(selector);
+};
 
-    // Multiple DOM element selection
-    window.$$ = function(selector) {
-        var items   = {};
-        var results = Array.prototype.slice.call(document.querySelectorAll(selector));
-        var length  = results.length;
-        
-        for (var i = 0 ; i < length; i++) {
-            items[i] = results[i];
-        }
-        
-        items.length = length;
-        items.splice = [].splice();
-        
-        items.each = function(callback) {
-            for (var i = 0 ; i < length; i++) {
-                callback.call(items[i]);
-            }
-        }
-
-        items.on = function (event, fn) {
-            []['forEach'].call(this, function (el) {
-                el.on(event, fn);
-            });
-            return this;
-        };
-
-        return items;
-    };
-
-    // Bind event using "on"
-    Element.prototype.on = Element.prototype.addEventListener;
-
-    // Start up audio
-    var audio = $('audio');
-    audio.controls = 'controls';
-    audio.load();
-
-    // Once audio finished playing
-    audio.on('ended', function () {
-        // Change background to WHITE 
-        $('body').style.backgroundColor = 'white';
-    });
-
-    // Paint the instruments with its own color
-    // and adds the text inside it
-    $$('.instrument').each(function () {
-        this.style.backgroundColor = this.dataset.color;
-        this.innerHTML = this.dataset.wav;
-    });
-
-
-    // Define room name used for all events
-    var room    = location.pathname;
-
-    // connect
-    var socket = io.connect('http://84.33.51.10', 8443);
-
-    // join the room
-    socket.on('connect', function () {
-        socket.emit('join', room);
-    });
-    socket.on('role', function (role) {
-        if (role == 'adm') {
-            admin();
-        }
-        else {
-            instrument();
-        }
-    });
-
-    var admin = function () { 
-
-        $('h1').innerHTML = 'Mobile Machine Drum - Admin';
-
-        // New instrument joins
-        socket.on('instrument', function (data) {
-            audio.play();
-        });
-
-        // Once select the instrument
-        $$('.instrument').on('click', function () {
-            // Send the hit to server
-            socket.emit('hit', { room: room, wav: this.dataset.wav });
-        });
-
-    };
-
-    var instrument = function () {
-
-        $('h1').innerHTML = 'Mobile Machine Drum - Instrument';
-
-        // Clean event instrument joins
-        socket.on('instrument', function () {});
-
-        // Once select the instrument
-        $$('.instrument').on('click', function () {
-            var color   = this.dataset.color;
-            var wav     = this.dataset.wav;
-
-            // Remove instrument selection
-            $('#instruments').parentNode.removeChild($('#instruments'));
-
-            // Load selected audio
-            audio.src = 'http://84.33.51.10:8443/' + wav + '.wav';
-            audio.load();
-            audio.play();
-            audio.pause();
-
-            // Inform the server the instrument
-            socket.emit('instrument', { room: room, wav: wav });
-
-            // Listen to the HIT
-            socket.on('hit', function(hit_wav) {
-                
-                // Play audio, but only if selected wav
-                if (hit_wav == wav) {
-                    audio.currentTime = 0;
-                    audio.play();
-                }
-
-                // Change background to HIT color
-                $('body').style.backgroundColor = color;
-            });
-            
-        });
-
+// Multiple DOM element selection
+window.$$ = function(selector) {
+    var items   = {};
+    var results = Array.prototype.slice.call(document.querySelectorAll(selector));
+    var length  = results.length;
+    
+    for (var i = 0 ; i < length; i++) {
+        items[i] = results[i];
     }
-    </script>
+    
+    items.length = length;
+    items.splice = [].splice();
+    
+    items.each = function(callback) {
+        for (var i = 0 ; i < length; i++) {
+            callback.call(items[i]);
+        }
+    }
+
+    items.on = function (event, fn) {
+        []['forEach'].call(this, function (el) {
+            el.on(event, fn);
+        });
+        return this;
+    };
+
+    return items;
+};
+
+// Bind event using "on"
+Element.prototype.on = Element.prototype.addEventListener;
+
+var MachineDrums = function() {
+    var self = this;
+
+    // Config options
+    self.server = {
+        hostname: '127.0.0.1',
+        port    : 8443
+    };
+    self.animationTime = 1000; // milliseconds
+
+    // Current wav
+    self.wav = null;
+
+    // Get each wav from the drums
+    self.waves = {};
+    $$('.instrument').each(function() {
+        self.waves[this.dataset.wav] = this;
+
+        // Paint the instruments with its own color
+        // and adds the text inside it
+        $$('.instrument').each(function () {
+            this.style.backgroundColor = this.dataset.color;
+            this.innerHTML = this.dataset.wav;
+        });
+    });
+
+    // Handle the socket communication
+    var socketHandler = function() {
+        // Define room name
+        self.room = location.pathname;
+
+        // Connect
+        self.socket = io.connect('http://' + self.server.hostname, self.server.port);
+
+        // Join the room
+        self.socket.on('connect', function() {
+            self.socket.emit('join', self.room);
+        });
+        self.socket.on('role', function(role) {
+            if (role == 'adm') {
+                self.roleAsAdmin();
+            } else {
+                self.roleAsInstrument();
+            }
+        });
+    };
+    socketHandler();
+
+    return this;
+};
+
+MachineDrums.prototype.roleAsAdmin = function() {
+    var self = this;
+
+    // Set as admin and enable controls
+    $('h1').innerHTML = 'Mobile Machine Drum - Admin';
+
+    // Once select the instrument
+    $$('.instrument').on('click', function () {
+        // Send the hit to server
+        self.socket.emit('hit', { room: self.room, wav: this.dataset.wav });
+    });
+};
+
+MachineDrums.prototype.roleAsInstrument = function() {
+    var self = this;
+
+    // Set as instrument and disable controls
+    $('h1').innerHTML = 'Mobile Machine Drum - Instrument';
+
+    // Once select the instrument
+    $$('.instrument').on('click', function() {
+        var color = this.dataset.color;
+        var wav   = this.dataset.wav;
+
+        // Mark the selected wav
+        self.wav = wav;
+
+        // Load selected audio
+        self.audio = $('audio');
+        self.audio.controls = 'controls';
+        self.audio.src = 'http://' + self.server.hostname + ':' + self.server.port + '/' + wav + '.wav';
+        self.audio.load();
+        self.audio.play();
+        self.audio.pause();
+
+        // Once audio finished playing
+        self.audio.on('ended', function () {
+            // Do something?
+        });
+
+        // Inform the server the instrument
+        self.socket.emit('instrument', { room: self.room, wav: wav });
+
+        // Listen to the HIT
+        self.socket.on('hit', function(wav) {
+           self.onHit(wav);
+        });
+    });
+};
+
+MachineDrums.prototype.onHit = function(wav) {
+    var self = this;
+
+    // Get instrument element
+    var el = self.waves[wav];
+
+    // Only play audio if selected wav
+    if (self.wav === wav) {
+        self.audio.currentTime = 0;
+        self.audio.play();
+    }
+    el.className = 'instrument hit';
+
+    window.setTimeout(function() {
+        el.className = 'instrument';
+    }, self.animationTime);
+};
+
+var instance = new MachineDrums();
+
+</script>
 
 </body>
-
 </html>
