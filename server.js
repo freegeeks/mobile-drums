@@ -63,7 +63,7 @@ io.sockets.on('connection', function (socket) {
 
         // Report to admin which one
         // this is sent to all clients
-        io.sockets.sockets[adms[data.room]].emit('instrument', data.wav);
+        io.sockets.sockets[adms[data.room]].emit('instrument', data.sound);
 
 
     });
@@ -72,6 +72,6 @@ io.sockets.on('connection', function (socket) {
     // Once admin requests a HIT
 	socket.on('hit', function(data) {
         // Hit the instrument!
-		io.sockets.in(data.room).emit('hit', data.wav);
+		io.sockets.in(data.room).emit('hit', data.sound);
 	});
 });
