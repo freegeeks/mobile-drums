@@ -20,3 +20,13 @@ FLOW
 - /room-name get the location.path and joins the room-name
 - server defines not the first as INSTRUMENTS (clients)
 - shows the DRUMS and allow instrument select or change instrument
+
+- TODO NEXT
+============
+
+- Make responsive
+- Bind keyboard keys
+- Create patterns in server
+- Create pattern interface
+- Choose approppriated colors
+- Manage quantity of instruments
