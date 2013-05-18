@@ -18,12 +18,16 @@
 <audio src="/snd/coin.wav" controls="controls"></audio> 
 
 <ul id="instruments">
-    <li class="instrument" data-color="red"    data-name="hit-hat" data-sound="HH_2_closed_a"><span></span></li>
-    <li class="instrument" data-color="indigo" data-name="kick"    data-sound="Kick_Reg_1a"><span></span></li>
-    <li class="instrument" data-color="orange" data-name="snare"   data-sound="Snare_Reg_1a"><span></span></li>
-    <li class="instrument" data-color="green"  data-name="tom"     data-sound="Tom_Hi"><span></span></li>
-    <li class="instrument" data-color="blue"   data-name="ride"    data-sound="Ride_Side"><span></span></li>
-    <li class="instrument" data-color="yellow" data-name="stick"   data-sound="Stick"><span></span></li>
+    <li class="instrument active" data-color="red"    data-name="hit-hat" data-sound="HH_2_closed_a"><span></span></li>
+    <li class="instrument active" data-color="indigo" data-name="kick"    data-sound="Kick_Reg_1a"><span></span></li>
+    <li class="instrument active" data-color="orange" data-name="snare"   data-sound="Snare_Reg_1a"><span></span></li>
+    <li class="instrument active" data-color="green"  data-name="tom"     data-sound="Tom_Hi"><span></span></li>
+    <li class="instrument active" data-color="blue"   data-name="ride"    data-sound="Ride_Side"><span></span></li>
+    <li class="instrument active" data-color="yellow" data-name="stick"   data-sound="Stick"><span></span></li>
+</ul>
+
+<ul class="patterns">
+<li class="pattern">Pattern</li>
 </ul>
 
 <h2>share</h2>
@@ -78,7 +82,7 @@ var MachineDrums = function() {
 
     // Config options
     self.server = {
-        hostname: '192.168.0.13',
+        hostname: '192.168.2.2',
         port    : 8443
     };
     self.animationTime = 150; // milliseconds
@@ -95,7 +99,7 @@ var MachineDrums = function() {
         // and adds the text inside it
         $$('.instrument').each(function () {
             this.style.backgroundColor = this.dataset.color;
-            this.innerHTML = this.dataset.name;
+            this.innerHTML = '<span>' + this.dataset.name + '</span>';
         });
     });
 
@@ -136,10 +140,52 @@ MachineDrums.prototype.roleAsAdmin = function() {
     // Set as admin and enable controls
     $('h1').innerHTML = 'Mobile Machine Drum - Admin';
 
+    // Listen to the STATS update
+    self.socket.on('instrument', function(data) {
+        // TODO this was copied from the painted can be reused
+        $$('.instrument').each(function () {
+            if (!data[this.dataset.sound]) {
+                // show button as disabled
+                this.classList.remove('active');
+                // created index in the object with ZERO
+                data[this.dataset.sound] = 0;
+            }
+            // update the contents of the button
+            this.innerHTML = '<span>' + this.dataset.name + ' <b>' + data[this.dataset.sound] + '</b></span>';
+        });
+    });
+
     // Once select the instrument
     $$('.instrument').on('click', function () {
         // Send the hit to server
         self.socket.emit('hit', { room: self.room, sound: this.dataset.sound });
+    });
+
+    $('.pattern').on('click', function () {
+        this.classList.toggle('active');
+
+        if (!this.classList.contains('active')) {
+            self.socket.emit('stop');
+            return;
+        }
+        self.socket.emit('start', { room: self.room, tempo: 120, pattern: [
+            [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
+            null,
+            [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
+            null,
+            [ 'HH_2_closed_a' ],
+            null,
+            [ 'Snare_Reg_1a', 'HH_2_closed_a' ],
+            null,
+            [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
+            null,
+            [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
+            null,
+            [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
+            null,
+            [ 'Snare_Reg_1a', 'HH_2_closed_a'],
+            null
+        ]});
     });
 };
 
@@ -153,6 +199,12 @@ MachineDrums.prototype.roleAsInstrument = function() {
     $$('.instrument').on('click', function() {
         var color = this.dataset.color;
         var sound = this.dataset.sound;
+
+        // activate only one instrument
+        $$('.instrument').each(function () {
+            this.classList.remove('active');
+        });
+        this.classList.add('active');
 
         // Mark the selected sound
         self.sound = sound;
@@ -185,10 +237,10 @@ MachineDrums.prototype.hit = function(sound, makeSound) {
         self.audio.currentTime = 0;
         self.audio.play();
     }
-    el.className = 'instrument hit';
+    el.classList.add('hit');
 
     window.setTimeout(function() {
-        el.className = 'instrument';
+        el.classList.remove('hit');
     }, self.animationTime);
 };
 

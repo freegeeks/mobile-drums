@@ -16,6 +16,15 @@ font-family: 'Dosis', sans-serif;
 text-shadow: 2px 2px #000;
 
 }
+
+.instrument {
+    opacity: 0.4;
+}
+
+.instrument.active {
+    opacity: 1;
+}
+
 .instrument span {
 float: left;
 padding: 150px;
@@ -51,6 +60,10 @@ cursor: pointer;
 -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
 box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
 margin-top: 20px;
+}
+
+.pattern.active {
+    color: #F00;
 }
 
 h1{

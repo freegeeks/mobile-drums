@@ -29,10 +29,15 @@ io.sockets.on('connection', function (socket) {
 
     // once a new client joins the server
     socket.on('join', function (room) {
-        console.log('join', room);
 
         // define role
         var role = adms[room] ? 'cli' : 'adm';
+
+        // join room
+        socket.join(room);
+
+        // tell the role
+        socket.emit('role', role);
 
         // if admin add to list
         if (role == 'adm') {
@@ -43,14 +48,16 @@ io.sockets.on('connection', function (socket) {
             socket.on('disconnect', function () {
                 delete adms[room];
             });
-        }
-        
-        // join room
-        socket.join(room);
 
-        // tell the role
-        console.log('role', role);
-        socket.emit('role', role);
+            // update stats for new admin
+            stats(room);
+        }
+        else {
+            //  call stats on disconnect
+            socket.on('disconnect', function () {
+                stats(room);
+            });
+        }    
     });
 
     // When new instrument joins 
@@ -62,11 +69,13 @@ io.sockets.on('connection', function (socket) {
         if (!adms[data.room]) {
             return;
         }
-
-        // Report to admin which one
-        // this is sent to all clients
-        console.log('instrument', data);
-        io.sockets.sockets[adms[data.room]].emit('instrument', data.sound);
+        
+        // mark socket to generate stats
+        socket.set('instrument', data.sound, function () {
+            // Report to admin which one
+            // this is sent to all clients
+            stats(data.room);
+        });
     });
 
 
@@ -75,4 +84,45 @@ io.sockets.on('connection', function (socket) {
         // Hit the instrument!
 		io.sockets.in(data.room).emit('hit', data.sound);
 	});
+
+    // Start playing the pattern
+    socket.on('start', function (data) {
+        var step = 0;
+        var interval = setInterval(function () { pattern(data, step++); }, 60000 / data.tempo / 4);
+        socket.on('stop', function (data) {
+            clearInterval(interval);
+        });
+    });
 });
+
+// pattern step, this is called
+// on each of the steps during pattern loop
+function pattern (data, step) {
+    // if there is anything to play
+    if (data.pattern[step % data.pattern.length]) {
+        // play all sounds at once
+        for (var i in data.pattern[step % data.pattern.length]) {
+            io.sockets.in(data.room).emit('hit', data.pattern[step % data.pattern.length][i]);
+        }
+    }
+}
+
+// This is called to update
+// stats at the admin side
+function stats (room) {
+    var stats   = {};
+    var clis    = io.sockets.clients(room);
+    for (var i in clis) {
+        clis[i].get('instrument', function (err, name) {
+            if (name) {
+                if (!stats[name]) {
+                    stats[name] = 1;
+                }
+                else {
+                    stats[name]++;
+                }
+            }
+        })
+    }
+    io.sockets.sockets[adms[room]].emit('instrument', stats);
+}
