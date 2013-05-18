@@ -101,12 +101,12 @@ var MachineDrums = function() {
 
     // Get each sound from the drums
     self.sounds = {};
-    $$('.instrument span').each(function() {
+    $$('.instrument').each(function() {
         self.sounds[this.dataset.sound] = this;
 
         // Paint the instruments with its own color
         // and adds the text inside it
-        $$('.instrument span').each(function () {
+        $$('.instrument').each(function () {
             this.style.backgroundColor = this.dataset.color;
             this.innerHTML = '<span>' + this.dataset.name + '</span>';
         });
@@ -166,7 +166,7 @@ MachineDrums.prototype.roleAsAdmin = function() {
     });
 
     // Once select the instrument
-    $$('.instrument span').on('click', function () {
+    $$('.instrument').on('click', function () {
         // Send the hit to server
         self.socket.emit('hit', { room: self.room, sound: this.dataset.sound });
     });
