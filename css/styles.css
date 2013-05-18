@@ -52,7 +52,7 @@ cursor: pointer;
 .instrument span:active {
 -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
 box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
-margin-top: 20px;
+margin-top: 10px;
 }
 
 .pattern.active {
@@ -80,6 +80,8 @@ display: block;
 ul li {
 	float: left;
 	margin: 5%;
+	width: 40%;
+	height: 150px;
 }
 p{
 color: #fff;
