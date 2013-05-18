@@ -67,11 +67,11 @@
     	background: url('img/logo.png') no-repeat center top;
     	height: 420px;
     }
-       .instrument.hit,
        .instrument:hover {
          -webkit-box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
          box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
          cursor: pointer; }
+       .instrument.hit,
        .instrument:active {
          -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
          box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
@@ -135,15 +135,15 @@
 
 <h1>Mobile Machine Drum</h1>
 <p>play drums using your friend's mobiles!</p>
-<audio src="/coin.wav" controls="controls"></audio> 
+<audio src="/snd/coin.wav" controls="controls"></audio> 
 
 <ul id="instruments">
-    <li class="instrument" data-color="red" data-wav="tom"></li>
-    <li class="instrument" data-color="orange" data-wav="sn"></li>
-    <li class="instrument" data-color="yellow" data-wav="hh2"></li>
-    <li class="instrument" data-color="green" data-wav="hh1"></li>
-    <li class="instrument" data-color="blue" data-wav="bd"></li>
-    <li class="instrument" data-color="indigo" data-wav="bd"></li>
+    <li class="instrument" data-color="red" data-sound="tom"></li>
+    <li class="instrument" data-color="orange" data-sound="sn"></li>
+    <li class="instrument" data-color="yellow" data-sound="hh2"></li>
+    <li class="instrument" data-color="green" data-sound="hh1"></li>
+    <li class="instrument" data-color="blue" data-sound="bd"></li>
+    <li class="instrument" data-color="indigo" data-sound="bd"></li>
 </ul>
 
 <h2>share</h2>
@@ -203,19 +203,19 @@ var MachineDrums = function() {
     };
     self.animationTime = 1000; // milliseconds
 
-    // Current wav
-    self.wav = null;
+    // Current sound
+    self.sound = null;
 
-    // Get each wav from the drums
-    self.waves = {};
+    // Get each sound from the drums
+    self.sounds = {};
     $$('.instrument').each(function() {
-        self.waves[this.dataset.wav] = this;
+        self.sounds[this.dataset.sound] = this;
 
         // Paint the instruments with its own color
         // and adds the text inside it
         $$('.instrument').each(function () {
             this.style.backgroundColor = this.dataset.color;
-            this.innerHTML = this.dataset.wav;
+            this.innerHTML = this.dataset.sound;
         });
     });
 
@@ -253,7 +253,7 @@ MachineDrums.prototype.roleAsAdmin = function() {
     // Once select the instrument
     $$('.instrument').on('click', function () {
         // Send the hit to server
-        self.socket.emit('hit', { room: self.room, wav: this.dataset.wav });
+        self.socket.emit('hit', { room: self.room, sound: this.dataset.sound });
     });
 };
 
@@ -266,15 +266,15 @@ MachineDrums.prototype.roleAsInstrument = function() {
     // Once select the instrument
     $$('.instrument').on('click', function() {
         var color = this.dataset.color;
-        var wav   = this.dataset.wav;
+        var sound = this.dataset.sound;
 
-        // Mark the selected wav
-        self.wav = wav;
+        // Mark the selected sound
+        self.sound = sound;
 
         // Load selected audio
         self.audio = $('audio');
         self.audio.controls = 'controls';
-        self.audio.src = 'http://' + self.server.hostname + ':' + self.server.port + '/' + wav + '.wav';
+        self.audio.src = 'http://' + self.server.hostname + ':' + self.server.port + '/snd/' + sound + '.wav';
         self.audio.load();
         self.audio.play();
         self.audio.pause();
@@ -285,23 +285,23 @@ MachineDrums.prototype.roleAsInstrument = function() {
         });
 
         // Inform the server the instrument
-        self.socket.emit('instrument', { room: self.room, wav: wav });
+        self.socket.emit('instrument', { room: self.room, sound: sound });
 
         // Listen to the HIT
-        self.socket.on('hit', function(wav) {
-           self.onHit(wav);
+        self.socket.on('hit', function(sound) {
+           self.onHit(sound);
         });
     });
 };
 
-MachineDrums.prototype.onHit = function(wav) {
+MachineDrums.prototype.onHit = function(sound) {
     var self = this;
 
     // Get instrument element
-    var el = self.waves[wav];
+    var el = self.sounds[sound];
 
-    // Only play audio if selected wav
-    if (self.wav === wav) {
+    // Only play audio if selected sound
+    if (self.sound === sound) {
         self.audio.currentTime = 0;
         self.audio.play();
     }

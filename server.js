@@ -1,4 +1,5 @@
-var app = require('express')()
+var express = require('express')
+  , app = express()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server);
 
@@ -9,10 +10,10 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-// Sound files
-app.get('/:wav.wav', function (req, res) {
-  res.sendfile(__dirname + '/wav/' + req.params.wav + '.wav');
-});
+// Static files
+app.use('/css', express.static(__dirname + '/css'));
+app.use('/img', express.static(__dirname + '/img'));
+app.use('/snd', express.static(__dirname + '/snd'));
 
 // Room needs to be after sound files
 // for precedence reasons
