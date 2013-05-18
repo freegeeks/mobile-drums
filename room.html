@@ -138,12 +138,10 @@
 <audio src="/snd/coin.wav" controls="controls"></audio> 
 
 <ul id="instruments">
-    <li class="instrument" data-color="red" data-sound="tom"></li>
-    <li class="instrument" data-color="orange" data-sound="sn"></li>
-    <li class="instrument" data-color="yellow" data-sound="hh2"></li>
-    <li class="instrument" data-color="green" data-sound="hh1"></li>
-    <li class="instrument" data-color="blue" data-sound="bd"></li>
-    <li class="instrument" data-color="indigo" data-sound="bd"></li>
+    <li class="instrument" data-color="red"    data-label="tom"   data-sound="tom"></li>
+    <li class="instrument" data-color="indigo" data-label="bass"  data-sound="bd"></li>
+    <li class="instrument" data-color="orange" data-label="snare" data-sound="sn"></li>
+    <li class="instrument" data-color="green"  data-label="high snare" data-sound="hh1"></li>
 </ul>
 
 <h2>share</h2>
@@ -215,7 +213,7 @@ var MachineDrums = function() {
         // and adds the text inside it
         $$('.instrument').each(function () {
             this.style.backgroundColor = this.dataset.color;
-            this.innerHTML = this.dataset.sound;
+            this.innerHTML = this.dataset.label;
         });
     });
 
