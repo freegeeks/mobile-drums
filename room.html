@@ -107,8 +107,7 @@ var MachineDrums = function() {
         // Paint the instruments with its own color
         // and adds the text inside it
         $$('.instrument').each(function () {
-            this.style.backgroundColor = this.dataset.color;
-            this.innerHTML = '<span>' + this.dataset.name + '</span>';
+            this.innerHTML = '<span style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + '</span>';
         });
     });
 
@@ -161,7 +160,7 @@ MachineDrums.prototype.roleAsAdmin = function() {
                 data[this.dataset.sound] = 0;
             }
             // update the contents of the button
-            this.innerHTML = '<span>' + this.dataset.name + ' <b>' + data[this.dataset.sound] + '</b></span>';
+            this.innerHTML = '<span style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + ' <b>' + data[this.dataset.sound] + '</b></span>';
         });
     });
 

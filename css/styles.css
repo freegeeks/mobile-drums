@@ -28,10 +28,8 @@ text-shadow: 2px 2px #000;
 .instrument span {
 float: left;
 border: 1px solid #000;
-background: #fff;
 border-radius: 20px;
 display: block;
-background: #4162a8;
 border-top: 1px solid #38538c;
 border-right: 1px solid #1f2d4d;
 border-bottom: 1px solid #151e33;
