@@ -76,6 +76,15 @@ window.$$ = function(selector) {
 
 // Bind event using "on"
 Element.prototype.on = Element.prototype.addEventListener;
+Element.prototype.trigger = function (type, data) {
+    var event = document.createEvent('HTMLEvents');
+    event.initEvent(type, true, true);
+    event.data = data || {};
+    event.eventName = type;
+    event.target = this;
+    this.dispatchEvent(event);
+    return this;
+};
 
 var MachineDrums = function() {
     var self = this;
@@ -144,6 +153,7 @@ MachineDrums.prototype.roleAsAdmin = function() {
     self.socket.on('instrument', function(data) {
         // TODO this was copied from the painted can be reused
         $$('.instrument').each(function () {
+            this.classList.add('active');
             if (!data[this.dataset.sound]) {
                 // show button as disabled
                 this.classList.remove('active');
@@ -187,6 +197,22 @@ MachineDrums.prototype.roleAsAdmin = function() {
             null
         ]});
     });
+
+    function keyboard (e) {
+        var map = {
+            49: 'hit-hat',
+            50: 'kick',
+            51: 'snare',
+            52: 'tom',
+            53: 'ride',
+            54: 'stick'
+        };
+        if (map[e.keyCode]) {
+            $('.instrument[data-name="' + map[e.keyCode] + '"]').trigger('click');
+        }
+    }
+
+    window.addEventListener('keydown', keyboard, false);
 };
 
 MachineDrums.prototype.roleAsInstrument = function() {
