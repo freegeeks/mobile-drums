@@ -29,6 +29,7 @@ io.sockets.on('connection', function (socket) {
 
     // once a new client joins the server
     socket.on('join', function (room) {
+        console.log('join', room);
 
         // define role
         var role = adms[room] ? 'cli' : 'adm';
@@ -48,6 +49,7 @@ io.sockets.on('connection', function (socket) {
         socket.join(room);
 
         // tell the role
+        console.log('role', role);
         socket.emit('role', role);
     });
 
@@ -63,9 +65,8 @@ io.sockets.on('connection', function (socket) {
 
         // Report to admin which one
         // this is sent to all clients
+        console.log('instrument', data);
         io.sockets.sockets[adms[data.room]].emit('instrument', data.sound);
-
-
     });
 
 

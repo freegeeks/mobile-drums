@@ -198,7 +198,7 @@ var MachineDrums = function() {
 
     // Config options
     self.server = {
-        hostname: '127.0.0.1',
+        hostname: '192.168.0.13',
         port    : 8443
     };
     self.animationTime = 150; // milliseconds
@@ -237,6 +237,12 @@ var MachineDrums = function() {
             } else {
                 self.roleAsInstrument();
             }
+        });
+
+        // Listen to the HIT
+        self.socket.on('hit', function(sound) {
+            // Only play audio if selected sound
+            self.hit(sound, (self.sound === sound));
         });
     };
     socketHandler();
@@ -286,22 +292,16 @@ MachineDrums.prototype.roleAsInstrument = function() {
 
         // Inform the server the instrument
         self.socket.emit('instrument', { room: self.room, sound: sound });
-
-        // Listen to the HIT
-        self.socket.on('hit', function(sound) {
-           self.onHit(sound);
-        });
     });
 };
 
-MachineDrums.prototype.onHit = function(sound) {
+MachineDrums.prototype.hit = function(sound, makeSound) {
     var self = this;
 
     // Get instrument element
     var el = self.sounds[sound];
 
-    // Only play audio if selected sound
-    if (self.sound === sound) {
+    if (makeSound) {
         self.audio.currentTime = 0;
         self.audio.play();
     }
