@@ -124,5 +124,10 @@ function stats (room) {
             }
         })
     }
+    // in case of no admin it breaks
+    if (!adms[room]) {
+        return;
+    }
     io.sockets.sockets[adms[room]].emit('instrument', stats);
+
 }
