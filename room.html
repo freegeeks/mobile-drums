@@ -63,7 +63,7 @@ window.$$ = function(selector) {
         for (var i = 0 ; i < length; i++) {
             callback.call(items[i]);
         }
-    }
+    };
 
     items.on = function (event, fn) {
         []['forEach'].call(this, function (el) {
@@ -107,9 +107,7 @@ var MachineDrums = function() {
 
         // Paint the instruments with its own color
         // and adds the text inside it
-        $$('.instrument').each(function () {
-            this.innerHTML = '<span style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + '</span>';
-        });
+        this.innerHTML = '<a href="#" onClick="event.preventDefault(); alert(\'Hello\');" style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + '</a>';
     });
 
     // Handle the socket communication
@@ -161,7 +159,7 @@ MachineDrums.prototype.roleAsAdmin = function() {
                 data[this.dataset.sound] = 0;
             }
             // update the contents of the button
-            this.innerHTML = '<span style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + ' <b>' + data[this.dataset.sound] + '</b></span>';
+            this.innerHTML = '<a style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + ' <b>' + data[this.dataset.sound] + '</b></a>';
         });
     });
 
@@ -222,9 +220,10 @@ MachineDrums.prototype.roleAsInstrument = function() {
     $('h1').innerHTML = 'Mobile Machine Drum - Instrument';
 
     // Once select the instrument
-    $$('.instrument').on('click', function() {
-        var color = this.dataset.color;
-        var sound = this.dataset.sound;
+    $$('.instrument a').on('click', function() {
+        var node  = this.parentNode;
+        var color = node.dataset.color;
+        var sound = node.dataset.sound;
 
         // activate only one instrument
         $$('.instrument').each(function () {
