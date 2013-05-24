@@ -14,11 +14,12 @@
 
 </head>
 <body>
-
+<header>
 <h1>Mobile Machine Drum</h1>
 <p>play drums using your friend’s mobiles!</p>
-<a href="javascript:;" class="play">START</a>
 <input type="text" id="room" name="" value="" placeholder="name your room">
+</header>
+<a href="javascript:;" class="start">START</a>
 	
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -37,7 +38,7 @@ window.$ = function(selector) {
 Element.prototype.on = Element.prototype.addEventListener;
 
 // play button
-$('.play').on('click', function(e) {
+$('.start').on('click', function(e) {
     e.preventDefault();
     var roomName = escape($('#room').value);
     if (roomName.length === 0) {

@@ -7,16 +7,27 @@ padding-top: 10px;
 }
 body * {
 font-family: 'Dosis', sans-serif;
-text-shadow: 1px 1px 1px #000;
 height: 100%;
 }
+h1, p, a {
+text-shadow: 1px 1px 1px #000;
+}
+input::-webkit-input-placeholder, input:-ms-input-placeholder, input::-moz-placeholder, input::-webkit-input-placeholder {
+	color: ;
+}
 
+header {
+	width: 80%;
+	margin: auto;
+	display: table;
+}
 audio {
 display: none;
 }
 h1{
-width: 511px;
-height: 308px;
+width: 200px;
+height: 200px;
+float: left;
 display: block;
 text-indent: -9999px;
 margin: auto;
@@ -38,7 +49,8 @@ p{
 color: #fff;
 font-size: 1.8em;
 text-align: center;
-padding: 1%;
+padding:10px 0;
+text-align: left;
 }
 input {
 background: #0080ab;
@@ -46,24 +58,23 @@ border-radius: 6px;
 padding: 5px;
 color: #fff;
 font-size: 1em;
-width: 25%;
-margin: auto;
+width: 50%;
+margin-left: 15px;
 display: block;
 border: 1px solid #333;
 }
-a{
+a.start{
 font-size: 10em;
 color: #fff;
 text-decoration: none;
 text-align: center;
 width: 100%;
 float: left;
-margin-bottom: 10px;
 }
-a:hover{
+a.start:hover{
 color: #ccc;	
 }
-a:active{
+a.start:active{
 margin-top: 2px;	
 }
 .instrument {
@@ -72,7 +83,7 @@ opacity: 0.4;
 .instrument.active {
  opacity: 1;
 }
-.instrument span {
+.instrument a{
 float: left;
 border: 1px solid #000;
 border-radius: 20px;
@@ -91,12 +102,12 @@ text-shadow: 0px 1px 1px #000;
 text-align: center;
 width: 100%;
 }
-.instrument span:hover {
+.instrument a:hover {
 -webkit-box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
 box-shadow: inset 0 0px 20px 1px #87adff, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
 cursor: pointer;
 }
-.instrument span:active {
+.instrument a:active {
 -webkit-box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
 box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4px 3px 0 #111111;
 margin-top: 10px;
@@ -121,16 +132,31 @@ float: left;
 p {
 padding:10px 0;
 text-align: left;
+font-size: 140%;
 }
 input {
 margin-left: 15px;
 }
-a{
+a.start{
 margin-bottom: 0;
 }
 }
 
+
+@media (max-width: 480px) and (orientation : landscape) {
+
+h1 {
+	height: 350px;padding-bottom: 30px;
+	opacity: .5;
+}
+
+}
+
 @media (max-width: 480px) {
+header{
+	width: 100%;
+}
+
 h1 {
 background: url('../img/logo-s.png') no-repeat center top;
 width: 100%;
@@ -145,7 +171,7 @@ height: 41px;
 margin: 0 6% 23%;
 width: 35%;
 }
-.instrument span {
+.instrument a {
 padding: 20%;
 width: 60%;
 }
@@ -153,19 +179,18 @@ input{
 width: 80%;
 }
 a{
-font-size: 5em;margin-bottom: 5px;
 }
-p{
-	font-size: 1.5em;
-	padding: 1% 9.5%;
+a.start{
+font-size: 6em;margin-bottom: 5px;
 }
+p{font-size: 1.1em;padding: 1% 9.5%;text-align: center;}
 input {
 background: #0080ab;
 border-radius: 6px;
 padding: 5px;
 color: #fff;
 font-size: 1em;
-width: 25%;
+width: 80%;
 margin: auto;
 display: block;
 border: 1px solid #333;
