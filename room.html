@@ -250,7 +250,7 @@ MachineDrums.prototype.roleAsAdmin = function() {
         };
         var pattern = patterns[this.dataset.pattern];
 
-        self.socket.emit('start', { room: self.room, tempo: tempo, pattern: pattern });
+        self.socket.emit('start', { room: self.room, tempo: pattern.tempo, pattern: pattern.pattern });
     });
 
     function keyboard (e) {
