@@ -92,7 +92,7 @@ io.sockets.on('connection', function (socket) {
         socket.on('stop', function (data) {
             clearInterval(interval);
         });
-        socket.on('disconnect'), function (data) {
+        socket.on('disconnect', function (data) {
             clearInterval(interval);
         });
     });
