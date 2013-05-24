@@ -6,7 +6,7 @@
     <meta name="description" content="This is a mobile machine drum to play with friends in the same room. Admin can control intruments in the peers mobile devices.">
     <meta name="keywords" content="mobile machine drum, mobile, machine, drum, machine drum, play, friend, friends">
     <meta name="author" content="Free Geeks a.k.a. RRR">
-	<title>Mobile Machine Drum</title>
+	<title>MobileDrums</title>
 	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
@@ -15,23 +15,24 @@
 
 <h1>Mobile Machine Drum</h1>
 <p>invite your drums:</p>
-<i>url: mobiledrums.freegeeks.nl/test</i>
+<em><span>url:</span> mobiledrums.freegeeks.nl/test</em>
 <audio src="/snd/coin.wav" controls="controls"></audio> 
 
 <ul id="instruments">
-    <li class="instrument active" data-color="red"    data-name="hit-hat" data-sound="HH_2_closed_a"><span></span></li>
-    <li class="instrument active" data-color="indigo" data-name="kick"    data-sound="Kick_Reg_1a"><span></span></li>
-    <li class="instrument active" data-color="orange" data-name="snare"   data-sound="Snare_Reg_1a"><span></span></li>
-    <li class="instrument active" data-color="green"  data-name="tom"     data-sound="Tom_Hi"><span></span></li>
-    <li class="instrument active" data-color="blue"   data-name="ride"    data-sound="Ride_Side"><span></span></li>
-    <li class="instrument active" data-color="yellow" data-name="stick"   data-sound="Stick"><span></span></li>
+    <li class="instrument active a" data-color="#7c0900"    data-name="hit-hat" data-sound="HH_2_closed_a"><span></span></li>
+    <li class="instrument active b" data-color="#c95624" data-name="kick"    data-sound="Kick_Reg_1a"><span></span></li>
+    <li class="instrument active c" data-color="#ddaa1d" data-name="snare"   data-sound="Snare_Reg_1a"><span></span></li>
+    <li class="instrument active d" data-color="#2d6600"  data-name="tom"     data-sound="Tom_Hi"><span></span></li>
+    <li class="instrument active e" data-color="#305ebd"   data-name="ride"    data-sound="Ride_Side"><span></span></li>
+    <li class="instrument active f" data-color="#730096" data-name="stick"   data-sound="Stick"><span></span></li>
 </ul>
 
 <ul class="patterns">
-<li class="pattern">Pattern</li>
+<li class="pattern"><a href="#">raggae</a></li>
+<li class="pattern"><a href="#">breakbeat</a></li>
+<li class="pattern"><a href="#">jungle</a></li>
 </ul>
 
-<h2>share</h2>
 	
 <script src="/socket.io/socket.io.js"></script>
 <script>
