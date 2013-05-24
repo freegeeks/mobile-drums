@@ -81,8 +81,12 @@ color: #ccc;
 a.start:active{
 margin-top: 2px;	
 }
-body.cli .instrument.active a, body.admin .patterns.active a{
- border: 1px #acdd00 solid;
+body.admin .patterns.active a{
+	opacity: 1;
+}
+
+body.cli .instrument.active a{
+ border: 3px #acdd00 solid;
 }
 .instrument a{
 border: 1px solid #000;
@@ -121,11 +125,11 @@ color: #F00;
 
 /* URL */
 em {
-	color: #acdd00;
+	color: #039dff;
 	font-size: 1.5em;
 }
 em span {
-	color: #039dff;
+	color: #acdd00;
 }
 
 .patterns li{margin: 35px 10px;width: 29%;float: left;} 
@@ -141,6 +145,7 @@ em span {
 	margin:8%;
 	text-decoration: none;
 	font-size: 92%;
+	opacity: .6;
 }
 .patterns li a:hover{
 	opacity: .6;
@@ -178,7 +183,7 @@ em span {
 
 @media (min-width: 481px) and (max-width: 767px) { 
 header {
-	width: 100%;
+width: 100%;
 }
 h1 {
 width: 150px;
@@ -255,17 +260,17 @@ display: block;
 border: 1px solid #333;
 }
 .patterns {
-	margin-top: 20px;float: left;width: 100%;
+margin-top: 20px;float: left;width: 100%;
 }
 .patterns li{
-	margin: 0;
-	width: 33%;
+margin: 0;
+width: 33%;
 }
 .patterns li a{
-	padding: 10px 0;
-	display: block;
-	width: 100%;
-	margin:0%;
-	border-radius: 0;
+padding: 10px 0;
+display: block;
+width: 100%;
+margin:0%;
+border-radius: 0;
 }
 }
