@@ -110,11 +110,14 @@ var MachineDrums = function() {
         this.innerHTML = '<a href="javascript:;" style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + '</a>';
     });
 
+    // Define room name
+    self.room = location.pathname;
+
+    // Update placeholder
+    $$('em span').innerHTML = 'http://' + self.server.hostname + ':' + self.server.port + '/' + room;
+
     // Handle the socket communication
     var socketHandler = function() {
-        // Define room name
-        self.room = location.pathname;
-
         // Connect
         self.socket = io.connect('http://' + self.server.hostname, self.server.port);
 
