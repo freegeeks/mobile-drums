@@ -107,7 +107,7 @@ var MachineDrums = function() {
 
         // Paint the instruments with its own color
         // and adds the text inside it
-        this.innerHTML = '<a href="#" onClick="event.preventDefault(); alert(\'Hello\');" style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + '</a>';
+        this.innerHTML = '<a href="javascript:;" style="background-color: ' + this.dataset.color + ';">' + this.dataset.name + '</a>';
     });
 
     // Handle the socket communication
@@ -221,7 +221,9 @@ MachineDrums.prototype.roleAsInstrument = function() {
 
     // Once select the instrument
     $$('.instrument a').each(function() {
-        var handleClick = function() {
+        var handleClick = function(event) {
+            event.preventDefault();
+
             var node  = this.parentNode;
             var color = node.dataset.color;
             var sound = node.dataset.sound;
