@@ -220,35 +220,40 @@ MachineDrums.prototype.roleAsInstrument = function() {
     $('h1').innerHTML = 'Mobile Machine Drum - Instrument';
 
     // Once select the instrument
-    $$('.instrument a').on('click', function() {
-        var node  = this.parentNode;
-        var color = node.dataset.color;
-        var sound = node.dataset.sound;
+    $$('.instrument a').each(function() {
+        var handleClick = function() {
+            var node  = this.parentNode;
+            var color = node.dataset.color;
+            var sound = node.dataset.sound;
 
-        // activate only one instrument
-        $$('.instrument').each(function () {
-            this.classList.remove('active');
-        });
-        this.classList.add('active');
+            // activate only one instrument
+            $$('.instrument').each(function () {
+                this.classList.remove('active');
+            });
+            this.classList.add('active');
 
-        // Mark the selected sound
-        self.sound = sound;
+            // Mark the selected sound
+            self.sound = sound;
 
-        // Load selected audio
-        self.audio = $('audio');
-        self.audio.controls = 'controls';
-        self.audio.src = 'http://' + self.server.hostname + ':' + self.server.port + '/snd/' + sound + '.wav';
-        self.audio.load();
-        self.audio.play();
-        self.audio.pause();
+            // Load selected audio
+            self.audio = $('audio');
+            self.audio.controls = 'controls';
+            self.audio.src = 'http://' + self.server.hostname + ':' + self.server.port + '/snd/' + sound + '.wav';
+            self.audio.load();
+            self.audio.play();
+            self.audio.pause();
 
-        // Once audio finished playing
-        self.audio.on('ended', function () {
-            // Do something?
-        });
+            // Once audio finished playing
+            self.audio.on('ended', function () {
+                // Do something?
+            });
 
-        // Inform the server the instrument
-        self.socket.emit('instrument', { room: self.room, sound: sound });
+            // Inform the server the instrument
+            self.socket.emit('instrument', { room: self.room, sound: sound });
+        };
+
+        this.on('click', handleClick);
+        this.on('touchstart', handleClick);
     });
 };
 
