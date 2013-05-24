@@ -148,8 +148,11 @@ margin-bottom: 0;
 h1 {
 	height: 350px;padding-bottom: 30px;
 	opacity: .5;
+	margin: 0;
 }
-
+input {
+margin-left: 15px;
+}
 }
 
 @media (max-width: 480px) {
