@@ -81,10 +81,7 @@ color: #ccc;
 a.start:active{
 margin-top: 2px;	
 }
-.instrument {
-opacity: 0.4;
-}
-body.adm .instrument.active a, body.cli .patterns.active a{
+body.cli .instrument.active a, body.admin .patterns.active a{
  border: 1px #acdd00 solid;
 }
 .instrument a{
