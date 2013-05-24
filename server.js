@@ -88,7 +88,7 @@ io.sockets.on('connection', function (socket) {
     // Start playing the pattern
     socket.on('start', function (data) {
         var step = 0;
-        var timeout = setTimeout(function () { pattern(data, step++); }, 60000 / data.tempo / 4);
+        var timeout = setTimeout(function () { play_pattern(data, step++); }, 60000 / data.tempo / 4);
         socket.on('stop', function (data) {
             clearTimeout(timeout);
         });
@@ -97,7 +97,7 @@ io.sockets.on('connection', function (socket) {
 
 // pattern step, this is called
 // on each of the steps during pattern loop
-function pattern (data, step) {
+function play_pattern (data, step) {
 
     // get list of patterns for this step
     var pattern = data.pattern[step % data.pattern.length];
@@ -111,7 +111,7 @@ function pattern (data, step) {
         // Hit the instrument!
         io.sockets.in(data.room).emit('hit', pattern[i]);
     }
-    var timeout = setTimeout(function () { pattern(data, step++); }, 60000 / data.tempo / 4);
+    var timeout = setTimeout(function () { play_pattern(data, step++); }, 60000 / data.tempo / 4);
 }
 
 // This is called to update
