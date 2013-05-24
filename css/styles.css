@@ -81,8 +81,12 @@ color: #ccc;
 a.start:active{
 margin-top: 2px;	
 }
-body.cli .instrument.active a, body.admin .patterns.active a{
- border: 1px #acdd00 solid;
+body.admin .patterns.active a{
+	opacity: 1;
+}
+
+body.cli .instrument.active a{
+ border: 3px #acdd00 solid;
 }
 .instrument a{
 border: 1px solid #000;
@@ -141,6 +145,7 @@ em span {
 	margin:8%;
 	text-decoration: none;
 	font-size: 92%;
+	opacity: .6;
 }
 .patterns li a:hover{
 	opacity: .6;
