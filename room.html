@@ -28,9 +28,9 @@
 </ul>
 
 <ul class="patterns">
-<li class="pattern"><a href="#">raggae</a></li>
-<li class="pattern"><a href="#">breakbeat</a></li>
-<li class="pattern"><a href="#">jungle</a></li>
+<li class="pattern" data-pattern="pattern1"><a href="#">Drum'n'Bass</a></li>
+<li class="pattern" data-pattern="pattern2"><a href="#">breakbeat</a></li>
+<li class="pattern" data-pattern="pattern3"><a href="#">jungle</a></li>
 </ul>
 
 	
@@ -175,31 +175,82 @@ MachineDrums.prototype.roleAsAdmin = function() {
         self.socket.emit('hit', { room: self.room, sound: this.dataset.sound });
     });
 
-    $('.pattern').on('click', function () {
+    $$('.pattern').on('click', function () {
         this.classList.toggle('active');
 
         if (!this.classList.contains('active')) {
             self.socket.emit('stop');
             return;
         }
-        self.socket.emit('start', { room: self.room, tempo: 180, pattern: [
-            [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
-            null,
-            [ 'HH_2_closed_a' ],
-            null,
-            [ 'Snare_Reg_1a', 'HH_2_closed_a' ],
-            null,
-            [  'HH_2_closed_a' ],
-            null,
-            [ 'HH_2_closed_a' ],
-            null,
-            [ 'Kick_Reg_1a' ],
-            null,
-            [ 'Snare_Reg_1a'],
-            [ 'Kick_Reg_1a' ],
-            null,
-            null
-        ]});
+
+        var patterns = {
+            'pattern1': {
+                tempo: 180,
+                pattern: [
+                    [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
+                    null,
+                    [ 'HH_2_closed_a' ],
+                    null,
+                    [ 'Snare_Reg_1a', 'HH_2_closed_a' ],
+                    null,
+                    [  'HH_2_closed_a' ],
+                    null,
+                    [ 'HH_2_closed_a' ],
+                    null,
+                    [ 'Kick_Reg_1a' ],
+                    null,
+                    [ 'Snare_Reg_1a'],
+                    [ 'Kick_Reg_1a' ],
+                    null,
+                    null
+                ]
+            },
+            'pattern2': {
+                tempo: 180,
+                pattern: [
+                    [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
+                    null,
+                    [ 'HH_2_closed_a' ],
+                    null,
+                    [ 'Snare_Reg_1a', 'HH_2_closed_a' ],
+                    null,
+                    [  'HH_2_closed_a' ],
+                    null,
+                    [ 'HH_2_closed_a' ],
+                    null,
+                    [ 'Kick_Reg_1a' ],
+                    null,
+                    [ 'Snare_Reg_1a'],
+                    [ 'Kick_Reg_1a' ],
+                    null,
+                    null
+                ]
+            },
+            'pattern3': {
+                tempo: 180,
+                pattern: [
+                    [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
+                    null,
+                    [ 'HH_2_closed_a' ],
+                    null,
+                    [ 'Snare_Reg_1a', 'HH_2_closed_a' ],
+                    null,
+                    [  'HH_2_closed_a' ],
+                    null,
+                    [ 'HH_2_closed_a' ],
+                    null,
+                    [ 'Kick_Reg_1a' ],
+                    null,
+                    [ 'Snare_Reg_1a'],
+                    [ 'Kick_Reg_1a' ],
+                    null,
+                    null
+                ]
+            }
+        };
+        var pattern = patterns[this.dataset.pattern];
+
+        self.socket.emit('start', { room: self.room, tempo: tempo, pattern: pattern });
     });
 
     function keyboard (e) {
