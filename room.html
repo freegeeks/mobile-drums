@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
     
 </head>
-<body>
+<body class="cli">
 
 <h1>Mobile Machine Drum</h1>
 <p>invite your drums:</p>
@@ -131,6 +131,9 @@ var MachineDrums = function() {
             self.socket.emit('join', self.room);
         });
         self.socket.on('role', function(role) {
+            $('body').classList.toggle('adm');
+            $('body').classList.toggle('cli');
+
             if (role == 'adm') {
                 self.roleAsAdmin();
             } else {
