@@ -117,7 +117,7 @@ var MachineDrums = function() {
     self.room = location.pathname;
 
     // Update placeholder
-    $$('em span').innerHTML = 'http://' + self.server.hostname + ':' + self.server.port + '/' + self.room;
+    $('em span').innerHTML = 'http://' + self.server.hostname + ':' + self.server.port + '/' + self.room;
 
     // Handle the socket communication
     var socketHandler = function() {
