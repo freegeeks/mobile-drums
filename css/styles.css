@@ -84,7 +84,7 @@ margin-top: 2px;
 .instrument {
 opacity: 0.4;
 }
-.instrument.active a, .patterns.active a{
+body.adm .instrument.active a, body.cli .patterns.active a{
  border: 1px #acdd00 solid;
 }
 .instrument a{
