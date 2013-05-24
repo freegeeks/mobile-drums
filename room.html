@@ -176,7 +176,7 @@ MachineDrums.prototype.roleAsAdmin = function() {
             self.socket.emit('stop');
             return;
         }
-        self.socket.emit('start', { room: self.room, tempo: 120, pattern: [
+        self.socket.emit('start', { room: self.room, tempo: 180, pattern: [
             [ 'Kick_Reg_1a', 'HH_2_closed_a' ],
             null,
             [ 'HH_2_closed_a' ],
