@@ -87,6 +87,7 @@ opacity: 0.4;
 }
 .instrument.active {
  opacity: 1;
+ border: 1px #ccc solid;
 }
 .instrument a{
 border: 1px solid #000;
