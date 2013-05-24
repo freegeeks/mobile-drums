@@ -3,6 +3,7 @@ width: 100%;height: 100%;
 }
 body{
 background: #062d47;
+padding-top: 10px;
 }
 body * {
 font-family: 'Dosis', sans-serif;
@@ -32,7 +33,6 @@ ul li {
 float: left;
 margin: 5%;
 width: 40%;
-height: 150px;
 }
 p{
 color: #fff;
@@ -66,8 +66,6 @@ color: #ccc;
 a:active{
 margin-top: 2px;	
 }
-
-
 .instrument {
 opacity: 0.4;
 }
@@ -87,7 +85,7 @@ border-left: 1px solid #1f2d4d;
 box-shadow: inset 0 1px 10px 1px #5c8bee, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 4px 1px #111111;
 color: #fff;
 font: bold 20px/1 "helvetica neue", helvetica, arial, sans-serif;
-padding: 20% 0;
+padding: 10% 0;
 text-shadow: 0px 1px 1px #000;
 -webkit-background-clip: padding-box;
 text-align: center;
@@ -115,7 +113,7 @@ h1 {
 width: 150px;
 height: 92px;
 background-size: 100%;
-height: 200px;
+height: 100px;
 padding-bottom: 0;
 margin: 10px 20px 0 0;
 float: left;
@@ -134,17 +132,22 @@ margin-bottom: 0;
 
 @media (max-width: 480px) {
 h1 {
+background: url('../img/logo-s.png') no-repeat center top;
 width: 100%;
 background-size: 100%;
-height: 200px;
+height: 60px;
 padding-bottom: 0;
 margin-top: 10px;
 }
 ul li {
 float: left;
-margin: 5%;
-width: 40%;
-height: 70px;
+height: 41px;
+margin: 0 6% 23%;
+width: 35%;
+}
+.instrument span {
+padding: 20%;
+width: 60%;
 }
 input{
 width: 80%;
