@@ -177,6 +177,10 @@ MachineDrums.prototype.roleAsAdmin = function() {
         self.socket.emit('hit', { room: self.room, sound: this.dataset.sound });
     });
 
+    // Show Patterns
+    $('.patterns').style.display = '';
+
+    // On each pattern
     $$('.pattern').on('click', function () {
         this.classList.toggle('active');
 
@@ -316,6 +320,9 @@ MachineDrums.prototype.roleAsInstrument = function() {
         this.on('click', handleClick);
         this.on('touchstart', handleClick);
     });
+
+    // Hide Patterns
+    $('.patterns').style.display = 'none';
 };
 
 MachineDrums.prototype.hit = function(sound, makeSound) {
