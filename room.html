@@ -15,15 +15,15 @@
 
 <h1>Mobile Machine Drum</h1>
 <p>invite your drums:</p>
-<em><span>url:</span> mobiledrums.freegeeks.nl/test</em>
+<em>url: <span>...</span></em>
 <audio src="/snd/coin.wav" controls="controls"></audio> 
 
 <ul id="instruments">
-    <li class="instrument active a" data-color="#7c0900"    data-name="hit-hat" data-sound="HH_2_closed_a"><span></span></li>
+    <li class="instrument active a" data-color="#7c0900" data-name="hit-hat" data-sound="HH_2_closed_a"><span></span></li>
     <li class="instrument active b" data-color="#c95624" data-name="kick"    data-sound="Kick_Reg_1a"><span></span></li>
     <li class="instrument active c" data-color="#ddaa1d" data-name="snare"   data-sound="Snare_Reg_1a"><span></span></li>
-    <li class="instrument active d" data-color="#2d6600"  data-name="tom"     data-sound="Tom_Hi"><span></span></li>
-    <li class="instrument active e" data-color="#305ebd"   data-name="ride"    data-sound="Ride_Side"><span></span></li>
+    <li class="instrument active d" data-color="#2d6600" data-name="tom"     data-sound="Tom_Hi"><span></span></li>
+    <li class="instrument active e" data-color="#305ebd" data-name="ride"    data-sound="Ride_Side"><span></span></li>
     <li class="instrument active f" data-color="#730096" data-name="stick"   data-sound="Stick"><span></span></li>
 </ul>
 
@@ -117,7 +117,7 @@ var MachineDrums = function() {
     self.room = location.pathname;
 
     // Update placeholder
-    $('em span').innerHTML = 'http://' + self.server.hostname + ':' + self.server.port + '/' + self.room;
+    $('em span').innerHTML = 'http://' + self.server.hostname + ':' + self.server.port + self.room;
 
     // Handle the socket communication
     var socketHandler = function() {
