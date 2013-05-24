@@ -2,14 +2,7 @@ html {
 width: 100%;height: 100%;
 }
 body{
-background: #062d47; /* Old browsers */
-background: -moz-linear-gradient(top,  #062d47 0%, #323333 99%, #323333 99%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#062d47), color-stop(99%,#323333), color-stop(99%,#323333)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #062d47 0%,#323333 99%,#323333 99%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #062d47 0%,#323333 99%,#323333 99%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #062d47 0%,#323333 99%,#323333 99%); /* IE10+ */
-background: linear-gradient(to bottom,  #062d47 0%,#323333 99%,#323333 99%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#062d47', endColorstr='#323333',GradientType=0 ); /* IE6-9 */
+background: #062d47;
 }
 body * {
 font-family: 'Dosis', sans-serif;
@@ -17,14 +10,71 @@ text-shadow: 1px 1px 1px #000;
 height: 100%;
 }
 
+audio {
+display: none;
+}
+h1{
+width: 511px;
+height: 308px;
+display: block;
+text-indent: -9999px;
+margin: auto;
+background: url('../img/logo.png') no-repeat center top;
+z-index: 100;
+background-size: 100%;
+}
+ul { 
+width: 100%;
+float: left;
+display: block;
+}
+ul li {
+float: left;
+margin: 5%;
+width: 40%;
+height: 150px;
+}
+p{
+color: #fff;
+font-size: 1.8em;
+text-align: center;
+padding: 1%;
+}
+input {
+background: #0080ab;
+border-radius: 6px;
+padding: 5px;
+color: #fff;
+font-size: 1em;
+width: 25%;
+margin: auto;
+display: block;
+border: 1px solid #333;
+}
+a{
+font-size: 10em;
+color: #fff;
+text-decoration: none;
+text-align: center;
+width: 100%;
+float: left;
+margin-bottom: 10px;
+}
+a:hover{
+color: #ccc;	
+}
+
+a:active{
+margin-top: 2px;	
+}
+
+
 .instrument {
-    opacity: 0.4;
+opacity: 0.4;
 }
-
 .instrument.active {
-    opacity: 1;
+ opacity: 1;
 }
-
 .instrument span {
 float: left;
 border: 1px solid #000;
@@ -55,88 +105,36 @@ box-shadow: inset 0 1px 10px 1px #5c8bee, 0 1px 0 #1d2c4d, 0 2px 0 #1f3053, 0 4p
 margin-top: 10px;
 }
 .instrument.hit span {
-    background-color: white!important;
+background-color: white!important;
 }
 .pattern.active {
-    color: #F00;
-}
-h1{
-width: 100%;
-height: 310px;
-display: block;
-text-indent: -9999px;
-margin: auto;
-background: url('../img/logo.png') no-repeat center top;
-background-size: 30%;
-z-index: 100;
-}
-audio {
-display: none;
-}
-ul { 
-width: 100%;
-float: left;
-display: block;
-}
-ul li {
-	float: left;
-	margin: 5%;
-	width: 40%;
-	height: 150px;
-}
-p{
-color: #fff;
-font-size: 1.8em;
-text-align: center;
-padding: 1%;
-}
-input {
-background: #0080ab;
-border-radius: 6px;
-padding: 5px;
-color: #fff;
-font-size: 1em;
-width: 50%;
-margin: auto;
-display: block;
-border: 1px solid #333;
-}
-a{
-font-size: 5em;
-color: #fff;
-text-decoration: none;
-text-align: center;
-width: 100%;
-float: left;
-font-weight: bold;
-margin-bottom: 20px;
-}
-a:hover{
-	color: #ccc;	
+color: #F00;
 }
 
-@media (max-width: 800px) {
 
-h1 {
-background-size: 60%;
-height: 290px;
-}
-}
 
 @media (max-width: 480px) {
 
 h1 {
+width: 100%;
 background-size: 100%;
-height: 210px;
+height: 170px;
 padding-bottom: 0;
+margin-top: 10px;
 }
 ul li {
-	float: left;
-	margin: 5%;
-	width: 40%;
-	height: 70px;
+float: left;
+margin: 5%;
+width: 40%;
+height: 70px;
 }
 input{
-	width: 80%;
+width: 80%;
+}
+a{
+font-size: 5em;margin-bottom: 5px;
+}
+p{
+	font-size: 1.5em;
 }
 }
