@@ -299,7 +299,7 @@ MachineDrums.prototype.roleAsInstrument = function() {
             $$('.instrument').each(function () {
                 this.classList.remove('active');
             });
-            this.classList.add('active');
+            this.parentNode.classList.add('active');
 
             // Mark the selected sound
             self.sound = sound;
