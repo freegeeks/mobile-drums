@@ -89,7 +89,6 @@ body.cli .instrument.active a{
  border: 3px #acdd00 solid;
 }
 .instrument a{
-border: 3px solid transparent;
 border-radius: 20px;
 display: block;
 -webkit-box-shadow: inset 0 1px 3px 1px #000, 0px 1px 0 #1d2c4d, 0 6px 0px #1f3053, 0 8px 1px 1px #111111;
@@ -156,27 +155,33 @@ em span {
 .a a {
 	-webkit-box-shadow: inset 0 1px 3px 1px #3d0200, 0px 1px 0 #3d0200, 0 6px 0px #1f3053, 0 8px 1px 1px #3d0200;
 	box-shadow: inset 0 1px 6px 1px #3d0200, 0px 1px 0 #3d0200, 0 6px 0px #3d0200, 0 8px 1px 1px #3d0200;
+	border: 3px solid #7c0900;
 }
 .b a{
 	-webkit-box-shadow: inset 0 1px 3px 1px #642b12, 0px 1px 0 #642b12, 0 6px 0px #642b12, 0 8px 1px 1px #642b12;
 	box-shadow: inset 0 1px 6px 1px #642b12, 0px 1px 0 #642b12, 0 6px 0px #642b12, 0 8px 1px 1px #642b12;
+	border: 3px solid #c95624;
 }
 .c a{
 	-webkit-box-shadow: inset 0 1px 3px 1px #6b4d00, 0px 1px 0 #6b4d00, 0 6px 0px #6b4d00, 0 8px 1px 1px #6b4d00;
 	box-shadow: inset 0 1px 6px 1px #6b4d00, 0px 1px 0 #6b4d00, 0 6px 0px #6b4d00, 0 8px 1px 1px #6b4d00;
+	border: 3px solid #ddaa1d;
 }
 
 .d a{
 	-webkit-box-shadow: inset 0 1px 3px 1px #183400, 0px 1px 0 #183400, 0 6px 0px #183400, 0 8px 1px 1px #183400;
 	box-shadow: inset 0 1px 6px 1px #183400, 0px 1px 0 #183400, 0 6px 0px #183400, 0 8px 1px 1px #183400;
+	border: 3px solid #2d6600;
 }
 .e a{
 	-webkit-box-shadow: inset 0 1px 3px 1px #182f5e, 0px 1px 0 #182f5e, 0 6px 0px #182f5e, 0 8px 1px 1px #182f5e;
 	box-shadow: inset 0 1px 6px 1px #182f5e, 0px 1px 0 #182f5e, 0 6px 0px #182f5e, 0 8px 1px 1px #182f5e;
+	border: 3px solid #305ebd;
 }
 .f a{
 	-webkit-box-shadow: inset 0 1px 3px 1px #420055, 0px 1px 0 #420055, 0 6px 0px #420055, 0 8px 1px 1px #420055;
 	box-shadow: inset 0 1px 6px 1px #420055, 0px 1px 0 #420055, 0 6px 0px #420055, 0 8px 1px 1px #420055;
+	border: 3px solid #730096;
 }
 /* button colors*/
 
