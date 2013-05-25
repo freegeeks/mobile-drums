@@ -81,7 +81,7 @@ color: #ccc;
 a.start:active{
 margin-top: 2px;	
 }
-body.admin .patterns.active a{
+body.adm .patterns.active a{
 	opacity: 1;
 }
 
