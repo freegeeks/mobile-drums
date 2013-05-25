@@ -10,6 +10,6 @@ Each of the friends can choose an instrument to represent and emit sound for.<br
 <br>
 Try a live [DEMO](http://mobiledrums.freegeeks.nl:8443/)
 
-- Create as many room as you want
+- Create as many rooms as you want
 - Invite as many friends as you can
 - For better experience use Google Chrome (of course) 
