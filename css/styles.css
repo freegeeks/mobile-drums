@@ -42,7 +42,6 @@ background-size: 100%;
 width: 100%;
 float: left;
 display: block;
-margin-top: -60px;
 }
 #instruments li {
 float: left;
@@ -199,8 +198,10 @@ padding-bottom: 0;
 margin: 10px 20px 0 0;
 float: left;
 }
-#instruments{
-	margin-top: -20px;
+#instruments li {
+    float: left;
+    margin: 10px 10px;
+    width: 29%;
 }
 p {
 padding:10px 0;
@@ -213,6 +214,7 @@ margin-left: 15px;
 a.start{
 margin-bottom: 0;
 }
+
 }
 
 
