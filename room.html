@@ -14,12 +14,12 @@
     
 </head>
 <body>
-
+<header>
 <h1>Mobile Machine Drum</h1>
 <p>invite your drums:</p>
 <em>url: <span>...</span></em>
 <audio src="/snd/coin.wav" controls="controls"></audio> 
-
+</header>
 <ul id="instruments">
     <li class="instrument active a" data-color="#7c0900" data-name="hit-hat" data-sound="HH_2_closed_a"><span></span></li>
     <li class="instrument active b" data-color="#c95624" data-name="kick"    data-sound="Kick_Reg_1a"><span></span></li>
@@ -95,7 +95,7 @@ var MachineDrums = function() {
 
     // Config options
     self.server = {
-        hostname: '127.0.0.1',
+        hostname: '192.168.2.5',
         port    : 8443
     };
     // self.server.hostname = 'mobiledrums.freegeeks.local';
@@ -349,6 +349,15 @@ MachineDrums.prototype.hit = function(sound, makeSound) {
 var instance = new MachineDrums();
 
 </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-41009069-1', 'freegeeks.nl');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>
