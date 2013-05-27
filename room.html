@@ -187,9 +187,11 @@ MachineDrums.prototype.roleAsAdmin = function() {
     // On each pattern
     $$('.pattern').on('click', function () {
         this.classList.toggle('active');
+        
+        // Always stop the pattern
+        self.socket.emit('stop');
 
         if (!this.classList.contains('active')) {
-            self.socket.emit('stop');
             return;
         }
 
