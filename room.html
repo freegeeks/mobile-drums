@@ -120,7 +120,8 @@ var MachineDrums = function() {
     self.room = location.pathname;
 
     // Update placeholder
-    $('em span').innerHTML = 'http://' + self.server.hostname + ':' + self.server.port + self.room;
+    var port = (self.server.port !== 80) ? ':' + self.server.port : '';
+    $('em span').innerHTML = 'http://' + self.server.hostname + port + self.room;
 
     // Handle the socket communication
     var socketHandler = function() {
